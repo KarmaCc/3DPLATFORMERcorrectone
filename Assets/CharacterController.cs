@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    float maxSpeed = 3.0f;
+    public float maxSpeed;
+    public float normalSpeed = 1.0f;
+    public float sprintSpeed = 2.0f;
+
     float rotation = 0.0f;
     float camRotation = 0.0f;
     float rotationSpeed = 2.0f;
@@ -12,17 +15,49 @@ public class CharacterController : MonoBehaviour
     GameObject cam;
     Rigidbody myRigidbody;
 
+    bool isOnGround;
+    public GameObject groundChecker;
+    public LayerMask groundLayer;
+
+    public float maxSprint = 5.0f;
+    float sprintTimer;
+
     // Start is called before the first frame update
     void Start()
     {
         cam = GameObject.Find("Main Camera");
         myRigidbody = GetComponent<Rigidbody>();
+        
+        sprintTimer = maxSprint;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
+
+        if(isOnGround == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            myRigidbody.AddForce(transform.up * jumpForce);
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift) && sprintTimer > 0.0f)
+        {
+            maxSpeed = sprintSpeed;
+            sprintTimer = sprintTimer - Time.deltaTime;
+        }else
+        {
+            maxspeed = normalSpeed;
+            if(Input.GetKey(KeyCode.LeftShift) ==false){
+                sprintTimer = sprintTimer +Time.deltaTime;
+            }
+        }
+
+        sprintTimer = Mathf.Clamp(sprintTimer,0.0f, maxSprint);
+
+        Vector3 newVelocity = (transform.forward * Input.GetAxis("Vertical") * maxSpeed) + (transform.right * Input.GetAxis("Horizontal") * maxSpeed);
+
         transform.position = transform.position + (transform.forward * Input.GetAxis("Vertical"));
 
         Vector3 newVelocity = transform.forward * Input.GetAxis("vertical") * maxSpeed;
