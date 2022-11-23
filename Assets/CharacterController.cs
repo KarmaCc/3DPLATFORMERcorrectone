@@ -5,8 +5,8 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     public float maxSpeed;
-    public float normalSpeed = 1.0f;
-    public float sprintSpeed = 2.0f;
+    public float normalSpeed = 3.0f;
+    public float sprintSpeed = 4.0f;
 
     public float rotation = 0.0f;
     float camRotation = 0.0f;
@@ -69,5 +69,7 @@ public class CharacterController : MonoBehaviour
 
         camRotation = camRotation + Input.GetAxis("Mouse Y") * camRotationSpeed;
         cam.transform.localRotation = Quaternion.Euler(new Vector3(camRotation, 0.0f, 0.0f));
+
+        camRotation = Mathf.Clamp(camRotation, -40.0f, 40.0f);
     }
 }
