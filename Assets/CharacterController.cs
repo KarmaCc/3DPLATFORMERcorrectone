@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    
+    public AudioSource musicPlayer;
+    public AudioClip backgroundMusic;
     public float maxSpeed;
     public float normalSpeed = 3.0f;
     public float sprintSpeed = 4.0f;
@@ -32,6 +35,8 @@ public class CharacterController : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         
         sprintTimer = maxSprint;
+        musicPlayer.clip = backgroundMusic;
+        musicPlayer.loop = true;
    
     }
 

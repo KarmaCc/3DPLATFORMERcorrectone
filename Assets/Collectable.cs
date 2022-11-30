@@ -5,6 +5,8 @@ using System;
 
 public class Collectable : MonoBehaviour
 {
+    public AudioClip collect;
+    public AudioSource sfxPlayer;
 
     public static event Action OnCollected;
     public static int total;
@@ -22,6 +24,8 @@ public class Collectable : MonoBehaviour
         {
             OnCollected?.Invoke();
             Destroy(gameObject);
+            sfxPlayer.PlayOneShot(collect);
+            
 
         }
     }
