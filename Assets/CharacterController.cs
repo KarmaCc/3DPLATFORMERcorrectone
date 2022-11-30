@@ -15,6 +15,8 @@ public class CharacterController : MonoBehaviour
     GameObject cam;
     Rigidbody myRigidbody;
 
+    public Animator anim;
+
     bool isOnGround;
     public GameObject groundChecker;
     public LayerMask groundLayer;
@@ -30,6 +32,7 @@ public class CharacterController : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         
         sprintTimer = maxSprint;
+   
     }
 
 
@@ -37,9 +40,11 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
+        anim.SetBool("isOnGround", isOnGround);
 
         if(isOnGround == true && Input.GetKeyDown(KeyCode.Space))
         {
+            anim.SetTrigger("jumped");
             myRigidbody.AddForce(transform.up * jumpForce);
         }
 
@@ -71,5 +76,7 @@ public class CharacterController : MonoBehaviour
         cam.transform.localRotation = Quaternion.Euler(new Vector3(camRotation, 0.0f, 0.0f));
 
         camRotation = Mathf.Clamp(camRotation, -40.0f, 40.0f);
+
+        anim.SetFloat("speed", newVelocity.magnitude);
     }
 }
