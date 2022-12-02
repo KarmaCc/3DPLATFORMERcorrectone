@@ -4202,7 +4202,7 @@ MonoBehaviour:
   musicPlayer: {fileID: 0}
   backgroundMusic: {fileID: 0}
   maxSpeed: 12
-  normalSpeed: 6
+  normalSpeed: 20
   sprintSpeed: 8
   rotation: 0
   anim: {fileID: 228771413}
@@ -4210,7 +4210,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  jumpForce: 450
+  jumpForce: 1000
   maxSprint: 11
 --- !u!136 &318048737
 CapsuleCollider:
@@ -13209,6 +13209,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.3083
       objectReference: {fileID: 0}
+    - target: {fileID: -5926380724829940322, guid: d81de1193e546f54abed31e0fd6925b8, type: 3}
+      propertyPath: m_TagString
+      value: Scene Change
+      objectReference: {fileID: 0}
     - target: {fileID: -5426361884604355587, guid: d81de1193e546f54abed31e0fd6925b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.845
@@ -15690,7 +15694,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180797835}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.12590304, y: 0.27728537, z: 0.11748488}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
@@ -83,5 +84,13 @@ public class CharacterController : MonoBehaviour
         camRotation = Mathf.Clamp(camRotation, -40.0f, 40.0f);
 
         anim.SetFloat("speed", newVelocity.magnitude);
+        void OnTriggerEnter (Collider other)
+        {
+            if (other.tag == "Scene Change")
+            {
+                SceneManager.LoadScene(2);
+            }
+        }
+    
     }
 }
